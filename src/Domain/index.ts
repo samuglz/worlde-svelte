@@ -4,7 +4,6 @@ import { getDictionary } from '../API';
 export const initializeGame = async () => {
 	try {
 		isLoading.set(true);
-		console.log('isLoading', isLoading);
 		const response = await getDictionary();
 		dictionary.set(response);
 		const randomNumber = Math.floor(Math.random() * response.length);
