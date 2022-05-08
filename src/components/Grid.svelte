@@ -25,7 +25,6 @@
 
     const checkTry = () => {
         if (isCompleteRow()) {
-
             currentTry.set($currentTry + 1)
         }
     }
@@ -46,6 +45,6 @@
 
 
 {#each Array(MAX_TRIES) as _, i}
-    <Word index={i} />
+    <Word row={i} />
 {/each}
 <svelte:window on:keydown={handleKeydown}/>
