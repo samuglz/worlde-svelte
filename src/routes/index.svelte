@@ -9,7 +9,7 @@ let word = ''
 let splitWord = [];
 let isLoading = false;
 
-onMount(async () => {
+const initialize = async () => {
     try {
         isLoading = true;
         dictionary = await getDictionary();
@@ -22,11 +22,18 @@ onMount(async () => {
     } finally {
         isLoading = false;
     }
+}
+
+onMount(async () => {
+    await initialize();
 })
 </script>
 
 <Header title={'WORDLE'} />
 {#if !isLoading}
     <Grid />
+{/if}
+{#if isLoading}
+    <div class="flex justify-center items-center">Loading the game...</div>
 {/if}
 
