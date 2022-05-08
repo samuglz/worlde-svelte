@@ -1,21 +1,51 @@
 <script lang="ts">
-import Word from "./Word.svelte";
-const MAX_TRIES = 6;
-export let word = '';
+    import Word from "./Word.svelte";
+    import {currentTry, playerWords} from "../store";
+    import {isLetter, isBackSpace, isEnter} from "../utils";
+    const MAX_TRIES = 6;
+    export let wordLength = 5
 
-interface Game {
-    currentTry: number;
-    wordGuess: string;
-}
+    const isCompleteRow = () => $playerWords[$currentTry].length === wordLength
 
-const gameState: Game = {
-    currentTry: 0,
-    wordGuess: word
-}
+    const addChar = (letter) => {
+        $playerWords = $playerWords.map((word, idx) => {
+            return idx === $currentTry ?
+                [...$playerWords[$currentTry], letter]
+                : word
+        });
+    }
+
+    const deleteChar = () => {
+        $playerWords = $playerWords.map((word, idx) => {
+            return idx === $currentTry ?
+                $playerWords[$currentTry].slice(0, $playerWords[$currentTry].length - 1)
+                : word
+        });
+    }
+
+    const checkTry = () => {
+        if (isCompleteRow()) {
+
+            currentTry.set($currentTry + 1)
+        }
+    }
+
+    const handleKeydown = (event) => {
+            if(isLetter(event.key) && !isCompleteRow()) {
+                addChar(event.key);
+            }
+            if(isBackSpace(event.keyCode)) {
+                deleteChar();
+            }
+            if(isEnter(event.keyCode)) {
+                checkTry();
+            }
+    }
 
 </script>
 
 
 {#each Array(MAX_TRIES) as _, i}
-    <Word state={gameState} index={i} />
+    <Word index={i} />
 {/each}
+<svelte:window on:keydown={handleKeydown}/>

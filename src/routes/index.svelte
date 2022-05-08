@@ -1,5 +1,6 @@
 <script lang="ts">
-import { onMount} from "svelte";
+import { onMount } from "svelte";
+import {wordGuess} from "../store";
 import { getDictionary} from "../API";
 import Header from '../components/Header.svelte';
 import Grid from "../components/Grid.svelte";
@@ -15,6 +16,7 @@ onMount(async () => {
         const randomNumber = Math.floor(Math.random() * dictionary.length);
         word = dictionary[randomNumber];
         splitWord = word.split('');
+        wordGuess.set(dictionary[randomNumber])
     } catch (error) {
         console.error(error);
     } finally {
@@ -25,8 +27,6 @@ onMount(async () => {
 
 <Header title={'WORDLE'} />
 {#if !isLoading}
-    <div class="mt-10">
-        <Grid word={word} />
-    </div>
+    <Grid />
 {/if}
 
