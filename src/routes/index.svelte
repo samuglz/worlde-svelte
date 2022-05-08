@@ -26,7 +26,7 @@ onMount(async () => {
 <Header title={'WORDLE'} />
 {#if !isLoading}
     <div class="mt-10">
-        <Grid />
+        <Grid word={word} />
     </div>
 {/if}
 
