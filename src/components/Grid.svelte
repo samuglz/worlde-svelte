@@ -2,6 +2,7 @@
     import Word from "./Word.svelte";
     import {currentTry, playerWords} from "../store";
     import {isLetter, isBackSpace, isEnter} from "../utils";
+    import { emitter } from "../events";
     const MAX_TRIES = 6;
     export let wordLength = 5
 
@@ -25,7 +26,9 @@
 
     const checkTry = () => {
         if (isCompleteRow()) {
-            currentTry.set($currentTry + 1)
+            emitter.emit("checkTry");
+            // TODO: change for a custom event svelte (dispatch)
+            // currentTry.update(oldValue => oldValue + 1);
         }
     }
 
