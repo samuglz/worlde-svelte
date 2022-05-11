@@ -1,7 +1,7 @@
 <script lang="ts">
     import Word from "./Word.svelte";
     import {currentTry, playerWords, wordGuess, wordsCheck} from "../store";
-    import {isLetter, isBackSpace, isEnter, splitWord} from "../utils";
+    import {isLetter, isBackSpace, isEnter, splitWord, isCorrectWord} from "../utils";
     const MAX_TRIES = 6;
     export let wordLength = 5
 
@@ -48,7 +48,7 @@
     const checkTry = () => {
         if (isCompleteRow()) {
             handleCheckGuess()
-            if($currentTry < MAX_TRIES - 1) {
+            if($currentTry < MAX_TRIES - 1 && !isCorrectWord($wordsCheck[$currentTry])) {
                 currentTry.set($currentTry + 1)
             }
         }

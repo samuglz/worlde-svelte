@@ -4,3 +4,5 @@ export const isLetter = (char: string) => /^[a-zA-Z]$/.test(char);
 export const isBackSpace = (key: number) => key === BACKSPACE_CODE;
 export const isEnter = (key: number) => key === ENTER_CODE;
 export const splitWord = (word: string) => word.split('');
+export const isCorrectWord = (letterState: string[]) =>
+	letterState.every((letter) => letter === 'correct');
