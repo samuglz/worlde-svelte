@@ -50,7 +50,6 @@
             handleCheckGuess()
             if($currentTry < MAX_TRIES - 1) {
                 currentTry.set($currentTry + 1)
-                console.log($currentTry)
             }
         }
     }
