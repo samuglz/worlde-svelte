@@ -2,16 +2,17 @@
     import LetterInput from "./LetterInput.svelte";
     import {currentTry, playerWords, wordGuess} from "../store";
     import {splitWord} from "../utils";
-    import {emitter} from "../events";
+    import {onMount} from "svelte";
     export let row;
     export let length = 5;
     let currentStyle = ['normal', 'normal', 'normal', 'normal', 'normal'];
-
-    emitter.on('checkTry', () => {
-        if($currentTry === row) {
-            handleCheckGuess()
-        }
-
+    onMount(() => {
+        addEventListener('checkTry', () => {
+            if ($currentTry === row) {
+                console.log($currentTry, row);
+                handleCheckGuess()
+            }
+        })
     })
 
     const handleCheckGuess = () => {
