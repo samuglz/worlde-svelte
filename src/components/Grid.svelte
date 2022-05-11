@@ -1,7 +1,7 @@
 <script lang="ts">
     import Word from "./Word.svelte";
-    import {currentTry, playerWords} from "../store";
-    import {isLetter, isBackSpace, isEnter} from "../utils";
+    import {currentTry, playerWords, wordGuess, wordsCheck} from "../store";
+    import {isLetter, isBackSpace, isEnter, splitWord} from "../utils";
     const MAX_TRIES = 6;
     export let wordLength = 5
 
@@ -23,11 +23,35 @@
         });
     }
 
+    const handleCheckGuess = () => {
+        const currentWord = [...$playerWords[$currentTry]]
+        const splitWordGuess = splitWord($wordGuess)
+        for (let i = 0; i < wordLength; i++) {
+            let letterPosition = splitWordGuess.indexOf(currentWord[i])
+            if (letterPosition === -1) {
+                $wordsCheck[$currentTry][i] = 'wrong'
+            } else {
+                if (currentWord[i] === splitWordGuess[i]) {
+                    // shade green
+                    $wordsCheck[$currentTry][i] = 'correct'
+                } else {
+                    // shade box yellow
+                    $wordsCheck[$currentTry][i] = 'partial'
+                }
+
+                splitWordGuess[letterPosition] = "#"
+            }
+        }
+        $wordsCheck = [...$wordsCheck]
+    }
+
     const checkTry = () => {
         if (isCompleteRow()) {
-            // TODO: change for a custom event svelte (dispatch)
-            // currentTry.update(oldValue => oldValue + 1);
-            dispatchEvent(new CustomEvent("checkTry"))
+            handleCheckGuess()
+            if($currentTry < MAX_TRIES - 1) {
+                currentTry.set($currentTry + 1)
+                console.log($currentTry)
+            }
         }
     }
 

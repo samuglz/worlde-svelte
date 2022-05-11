@@ -10,4 +10,13 @@ const currentTry = writable<number>(0);
 
 const playerWords = writable([[], [], [], [], [], []]);
 
-export { wordGuess, currentTry, playerWords, isLoading, dictionary };
+const wordsCheck = writable([
+	['normal', 'normal', 'normal', 'normal', 'normal'],
+	['normal', 'normal', 'normal', 'normal', 'normal'],
+	['normal', 'normal', 'normal', 'normal', 'normal'],
+	['normal', 'normal', 'normal', 'normal', 'normal'],
+	['normal', 'normal', 'normal', 'normal', 'normal'],
+	['normal', 'normal', 'normal', 'normal', 'normal']
+]);
+
+export { wordGuess, currentTry, playerWords, isLoading, dictionary, wordsCheck };
