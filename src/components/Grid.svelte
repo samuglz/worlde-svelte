@@ -1,9 +1,11 @@
 <script lang="ts">
     import Word from "./Word.svelte";
-    import {currentTry, playerWords, wordGuess, wordsCheck} from "../store";
+    import Toast from "./Toast.svelte";
+    import {currentTry, dictionary, playerWords, wordGuess, wordsCheck} from "../store";
     import {isLetter, isBackSpace, isEnter, splitWord, isCorrectWord} from "../utils";
     const MAX_TRIES = 6;
     export let wordLength = 5
+    let toastMessage = ''
 
     const isCompleteRow = () => $playerWords[$currentTry].length === wordLength
 
@@ -46,12 +48,28 @@
     }
 
     const checkTry = () => {
-        if (isCompleteRow()) {
+        const words = [...$dictionary]
+        if(!words.includes($playerWords[$currentTry])) {
+            toastMessage = 'Invalid word!'
+        } else if (isCompleteRow()) {
             handleCheckGuess()
-            if($currentTry < MAX_TRIES - 1 && !isCorrectWord($wordsCheck[$currentTry])) {
+            if(isCorrectWord($wordsCheck[$currentTry])){
+                toastMessage = 'You win!'
+            } else if($currentTry < MAX_TRIES - 1) {
                 currentTry.set($currentTry + 1)
+            } else {
+                toastMessage = 'You lose!'
             }
+
+        } else {
+            toastMessage = 'Not enough letter'
         }
+    }
+
+    const handleClose = () => {
+        setTimeout(() =>{
+            toastMessage = ''
+        }, 2000)
     }
 
     const handleKeydown = (event) => {
@@ -69,7 +87,12 @@
 </script>
 
 
-{#each Array(MAX_TRIES) as _, i}
-    <Word row={i} />
-{/each}
+<div class="flex-col flex justify-center items-center">
+    <div>
+        {#each Array(MAX_TRIES) as _, i}
+            <Word row={i} />
+        {/each}
+    </div>
+    <Toast message={toastMessage} on:close={handleClose} />
+</div>
 <svelte:window on:keydown={handleKeydown}/>
