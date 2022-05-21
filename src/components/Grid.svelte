@@ -93,7 +93,6 @@
             }
     }
     const handleKeydownMobile = (event) => {
-        console.log(event)
         if(isLetter(event.detail) && !isCompleteRow()) {
             addChar(event.detail);
         }
