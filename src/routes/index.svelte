@@ -15,6 +15,12 @@ onMount(async () => {
     <Grid />
 {/if}
 {#if $isLoading}
-    <div class="flex justify-center items-center">Loading...</div>
+    <div class="loading-container">Loading...</div>
 {/if}
+
+<style>
+    .loading-container {
+        @apply flex justify-center items-center;
+    }
+</style>
 
