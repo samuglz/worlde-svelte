@@ -16,6 +16,6 @@
 
 <style>
     .toast {
-        @apply mt-10 w-40 h-10 bg-black text-white rounded-sm flex justify-center items-center absolute top-10;
+        @apply mt-10 w-40 h-10 bg-black text-white rounded-sm flex justify-center items-center absolute top-10 z-50;
     }
 </style>
