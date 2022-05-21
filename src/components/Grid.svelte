@@ -1,11 +1,19 @@
 <script lang="ts">
     import Word from "./Word.svelte";
     import Toast from "./Toast.svelte";
+    import Keyboard from "svelte-keyboard";
     import {currentTry, dictionary, playerWords, wordGuess, wordsCheck} from "../store";
     import {isLetter, isBackSpace, isEnter, splitWord, isCorrectWord} from "../utils";
+    import {onMount} from "svelte";
     const MAX_TRIES = 6;
     export let wordLength = 5
     let toastMessage = ''
+    let isMobile = false
+
+    onMount(() => {
+        isMobile = window.innerWidth < 768
+    })
+
 
     const isCompleteRow = () => $playerWords[$currentTry].length === wordLength
 
@@ -84,6 +92,18 @@
                 checkTry();
             }
     }
+    const handleKeydownMobile = (event) => {
+        console.log(event)
+        if(isLetter(event.detail) && !isCompleteRow()) {
+            addChar(event.detail);
+        }
+        if(isBackSpace(event.detail)) {
+            deleteChar();
+        }
+        if(isEnter(event.detail)) {
+            checkTry();
+        }
+    }
 
 </script>
 
@@ -97,3 +117,9 @@
     <Toast message={toastMessage} on:close={handleClose} />
 </div>
 <svelte:window on:keydown={handleKeydown}/>
+{#if isMobile}
+    <div class="absolute bottom-0 w-full">
+        <Keyboard on:keydown="{handleKeydownMobile}" />
+    </div>
+{/if}
+`
