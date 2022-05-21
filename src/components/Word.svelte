@@ -6,11 +6,17 @@
 
 </script>
 
-<div class="flex justify-center items-center gap-1 py-0.5">
+<div class="letters-container">
     {#each Array(length) as _, idxLetter}
         <LetterInput letter={$playerWords[row][idxLetter]} style={$wordsCheck[row][idxLetter]} />
     {/each}
 </div>
+
+<style>
+    .letters-container {
+        @apply flex justify-center items-center gap-1 py-0.5;
+    }
+</style>
 
 
 
