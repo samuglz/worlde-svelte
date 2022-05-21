@@ -108,7 +108,7 @@
 </script>
 
 
-<div class="flex-col flex justify-center items-center">
+<div class="words-container">
     <div>
         {#each Array(MAX_TRIES) as _, i}
             <Word row={i} />
@@ -118,8 +118,17 @@
 </div>
 <svelte:window on:keydown={handleKeydown}/>
 {#if isMobile}
-    <div class="absolute bottom-0 w-full">
+    <div class="virtual-keyboard">
         <Keyboard on:keydown="{handleKeydownMobile}" />
     </div>
 {/if}
+
+<style>
+    .virtual-keyboard {
+        @apply absolute bottom-0 w-full;
+    }
+    .words-container {
+        @apply flex-col flex justify-center items-center;
+    }
+</style>
 `
