@@ -12,7 +12,7 @@
 
 <style>
  .cell {
-     @apply w-14 h-14 border-2 border-solid text-2xl font-bold flex justify-center items-center;
+     @apply w-12 h-12 border-2 border-solid text-2xl font-bold flex justify-center items-center;
  }
  .normal{
      @apply border-gray-300 text-black;
