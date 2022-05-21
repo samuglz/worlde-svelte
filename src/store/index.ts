@@ -8,9 +8,9 @@ const dictionary = writable<string[]>([]);
 
 const currentTry = writable<number>(0);
 
-const playerWords = writable([[], [], [], [], [], []]);
+const playerWords = writable<string[][]>([[], [], [], [], [], []]);
 
-const wordsCheck = writable([
+const wordsCheck = writable<string[][]>([
 	['normal', 'normal', 'normal', 'normal', 'normal'],
 	['normal', 'normal', 'normal', 'normal', 'normal'],
 	['normal', 'normal', 'normal', 'normal', 'normal'],
