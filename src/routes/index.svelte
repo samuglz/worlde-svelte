@@ -10,7 +10,7 @@ onMount(async () => {
 })
 </script>
 
-<Header title={'WORDLE'} />
+<Header title={'SVELTE WORDLE'} />
 {#if !$isLoading}
     <Grid />
 {/if}
