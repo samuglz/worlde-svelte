@@ -130,4 +130,4 @@
         @apply flex-col flex justify-center items-center;
     }
 </style>
-`
+
