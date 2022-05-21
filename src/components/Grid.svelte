@@ -49,9 +49,10 @@
 
     const checkTry = () => {
         const words:string[] = [...$dictionary]
-        if($playerWords[$currentTry].length < wordLength) {
+        const currentWord:string[] = $playerWords[$currentTry]
+        if(currentWord.length < wordLength) {
             toastMessage = 'Not enough letter'
-        } else if(!words.includes($playerWords[$currentTry])) {
+        } else if(words.indexOf(currentWord.join('')) === -1) {
             toastMessage = 'Invalid word!'
         } else if (isCompleteRow()) {
             handleCheckGuess()
@@ -72,14 +73,14 @@
         }, 2000)
     }
 
-    const handleKeydown = (event:any) => {
+    const handleKeydown = (event:KeyboardEvent) => {
             if(isLetter(event.key) && !isCompleteRow()) {
                 addChar(event.key);
             }
-            if(isBackSpace(event.keyCode)) {
+            if(isBackSpace(event.code)) {
                 deleteChar();
             }
-            if(isEnter(event.keyCode)) {
+            if(isEnter(event.code)) {
                 checkTry();
             }
     }
