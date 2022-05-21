@@ -9,7 +9,7 @@
 
     const isCompleteRow = () => $playerWords[$currentTry].length === wordLength
 
-    const addChar = (letter) => {
+    const addChar = (letter:string) => {
         $playerWords = $playerWords.map((word, idx) => {
             return idx === $currentTry ?
                 [...$playerWords[$currentTry], letter]
@@ -48,8 +48,10 @@
     }
 
     const checkTry = () => {
-        const words = [...$dictionary]
-        if(!words.includes($playerWords[$currentTry])) {
+        const words:string[] = [...$dictionary]
+        if($playerWords[$currentTry].length < wordLength) {
+            toastMessage = 'Not enough letter'
+        } else if(!words.includes($playerWords[$currentTry])) {
             toastMessage = 'Invalid word!'
         } else if (isCompleteRow()) {
             handleCheckGuess()
@@ -61,8 +63,6 @@
                 toastMessage = 'You lose!'
             }
 
-        } else {
-            toastMessage = 'Not enough letter'
         }
     }
 
@@ -72,7 +72,7 @@
         }, 2000)
     }
 
-    const handleKeydown = (event) => {
+    const handleKeydown = (event:any) => {
             if(isLetter(event.key) && !isCompleteRow()) {
                 addChar(event.key);
             }
