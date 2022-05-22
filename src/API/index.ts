@@ -1,6 +1,8 @@
-export async function getDictionary(): Promise<string[]> {
-	const response = await fetch('https://random-word-api.herokuapp.com/all').then((data) =>
-		data.json()
-	);
-	return response.filter((words: string) => words.length === 5);
+import Words from "./Words";
+
+export async function getDictionary(length = 5, lang='es'): Promise<string[]> {
+	if(lang.toLowerCase() === 'es') {
+		return Words.spanish.filter(word => word.length === length);
+	}
+	return Words.english.filter(word => word.length === length);
 }
