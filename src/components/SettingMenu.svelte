@@ -41,7 +41,7 @@
             </select>
         </section>
         <section class="select-container">
-            <label for="length" class="label">Words's language:</label>
+            <label for="length" class="label">Words's length:</label>
             <select bind:value={length} id="length" class="select-input">
                 <option value="4">4</option>
                 <option value="5">5</option>
