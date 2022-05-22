@@ -3,7 +3,7 @@
     import CrossIcon from "./CrossIcon.svelte";
     import {wordLang, wordLength, resetState} from "../store";
     import {initializeGame} from "../Domain";
-    let isOpen = true;
+    let isOpen = false;
     let language = 'en'
     let length = '5'
 
