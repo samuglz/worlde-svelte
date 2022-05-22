@@ -110,7 +110,7 @@
 <div class="words-container">
     <div>
         {#each Array(MAX_TRIES) as _, i}
-            <Word row={i} />
+            <Word length={wordLength} row={i} />
         {/each}
     </div>
     <Toast message={toastMessage} on:close={handleClose} />
