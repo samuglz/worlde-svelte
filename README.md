@@ -2,10 +2,11 @@
 
 A basic wordle game svelte clone.
 
-### TODO:
-- **Configuration menu**
-  - Change words length
-  - Spanish words
-  
+## Improvements
 
-- **Improve Toast notifications**
+- **Configuration menu**
+  - [ ] **Dark theme**
+  - [x] **Change words length**
+  - [x] **Spanish words**
+  
+- [ ] **Improve Toast notifications**
