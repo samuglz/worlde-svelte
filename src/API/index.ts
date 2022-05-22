@@ -1,6 +1,6 @@
 import Words from "./Words";
 
-export async function getDictionary(length = 5, lang='es'): Promise<string[]> {
+export async function getDictionary(length = 5, lang='en'): Promise<string[]> {
 	if(lang.toLowerCase() === 'es') {
 		return Words.spanish.filter(word => word.length === length);
 	}
